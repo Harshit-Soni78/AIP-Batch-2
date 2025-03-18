@@ -8,8 +8,8 @@
 
 ### Session : Megha
 
-- Basic of NLP --> 19
-- Basic bot --> 20
+- Basic of NLP --> 18
+- Basic bot --> 19
 - ... 2nd topic --> 24,25
 
 ### Session : Mayank
