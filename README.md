@@ -18,6 +18,8 @@
 
 ### Session : Mohit
 
+!! unable to take sessions due to health issue
+
 - MNIST Number model (only numpy) --> 21,22,23
 
 ---
