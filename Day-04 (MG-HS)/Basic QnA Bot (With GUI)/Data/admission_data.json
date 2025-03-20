@@ -1,0 +1,178 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey", "Good day"],
+      "responses": ["Hello! How can I assist you today?", "Hi there! How can I help you?", "Hey! What can I do for you?"],
+      "context": ""
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye", "Till next time"],
+      "responses": ["Goodbye! Have a great day.", "See you later! Take care.", "Until next time!"],
+      "context": ""
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thanks for helping me"],
+      "responses": ["You're welcome!", "Glad I could assist!", "Anytime!"],
+      "context": ""
+    },
+    {
+      "tag": "admission_deadline",
+      "patterns": ["What is the application deadline?", "When do I need to apply?", "Deadline for application?"],
+      "responses": ["The application deadline is typically in September. Make sure to check the college's official website for the exact date."],
+      "context": ""
+    },
+    {
+      "tag": "admission_requirements",
+      "patterns": ["What are the admission requirements?", "What do I need to apply?", "What documents are required for admission?"],
+      "responses": ["To apply, you'll typically need transcripts, test scores, essays, and letters of recommendation. However, requirements may vary by college and program."],
+      "context": ""
+    },
+    {
+      "tag": "programs_offered",
+      "patterns": ["What programs does the college offer?", "What majors are available?", "List of courses offered?"],
+      "responses": ["The college offers a variety of programs including BE, ME, etc. You can find more details on the college's website."],
+      "context": ""
+    },
+    {
+      "tag": "financial_aid",
+      "patterns": ["Are scholarships available?", "Can I get financial aid?", "How can I afford college?"],
+      "responses": ["Yes, the college offers scholarships and financial aid options. Make sure to explore all available opportunities and deadlines."],
+      "context": ""
+    },
+    {
+      "tag": "campus_life",
+      "patterns": ["What is campus life like?", "Tell me about student activities", "Are there clubs on campus?"],
+      "responses": ["Campus life is vibrant with a variety of student activities, clubs, and events. You'll have plenty of opportunities to get involved and make friends."],
+      "context": ""
+    },
+    {
+      "tag": "housing",
+      "patterns": ["Is housing available for freshmen?", "What are the housing options?", "Tell me about dormitories", "Tell me about staying options"],
+      "responses": ["Housing is available for freshmen, with options including dormitories and on-campus apartments/hostels. Be sure to apply early to secure your preferred housing option."],
+      "context": ""
+    },
+    {
+      "tag": "support_services",
+      "patterns": ["What support services are available for students?", "Is there academic advising?", "Are there counseling services?"],
+      "responses": ["The college offers a range of support services including academic advising, counseling, tutoring, and career services to help students succeed."],
+      "context": ""
+    },
+    {
+      "tag": "internships",
+      "patterns": ["Are there internship opportunities?", "Can I do internships during college?", "Tell me about work-study programs"],
+      "responses": ["Yes, the college provides internship opportunities and work-study programs to help students gain real-world experience and build their resumes."],
+      "context": ""
+    },
+    {
+      "tag": "faculty",
+      "patterns": ["Tell me about the faculty", "Are the professors helpful?", "Do professors offer office hours?"],
+      "responses": ["The faculty at the college are highly qualified and supportive, often offering office hours to assist students with their academic and research endeavors."],
+      "context": ""
+    },
+    {
+      "tag": "study_abroad",
+      "patterns": ["Are there study abroad programs?", "Can I study abroad during college?", "Tell me about exchange programs"],
+      "responses": ["Yes, the college offers study abroad programs and exchange opportunities for students to immerse themselves in different cultures and academic environments."],
+      "context": ""
+    },
+    {
+      "tag": "diversity",
+      "patterns": ["What is the diversity of the student body?", "Tell me about diversity on campus", "Are there international students?"],
+      "responses": ["The college prides itself on its diverse student body, with students from various backgrounds and cultures enriching the campus community."],
+      "context": ""
+    },
+    {
+      "tag": "admission_interview",
+      "patterns": ["Is there an admission interview?", "What is the interview process like?", "Tell me about admission interviews"],
+      "responses": ["Yes, there may be an admission interview as part of the application process. It's an opportunity for the college to learn more about you and for you to ask any questions you may have."],
+      "context": ""
+    },
+    {
+      "tag": "application_tips",
+      "patterns": ["Do you have any tips for the application process?", "How can I improve my application?", "Tell me about application strategies"],
+      "responses": ["Make sure to start your application early, thoroughly review all requirements, and showcase your strengths and experiences effectively in your essays and personal statements."],
+      "context": ""
+    },
+    {
+      "tag": "admission_tests",
+      "patterns": ["What standardized tests are required?", "Do I need to take the SAT or ACT?", "Tell me about admission exams"],
+      "responses": ["The college may require standardized tests such as the SAT or ACT. Check the admissions website for specific requirements and deadlines."],
+      "context": ""
+    },
+    {
+      "tag": "financial_planning",
+      "patterns": ["How much does it cost to attend?", "What is the tuition fee?", "Tell me about financial planning for college"],
+      "responses": ["Tuition fees vary by college and program. Be sure to factor in additional costs such as housing, books, and personal expenses when planning for college."],
+      "context": ""
+    },
+    {
+      "tag": "admission_status",
+      "patterns": ["How can I check my admission status?", "When will I hear back from the college?", "Tell me about admission decisions"],
+      "responses": ["You can usually check your admission status online through the college's admissions portal. Admission decisions are typically communicated by mail or email."],
+      "context": ""
+    },
+    {
+      "tag": "application_fee",
+      "patterns": ["Is there an application fee?", "How much is the application fee?", "Tell me about application fees"],
+      "responses": ["Yes, there may be an application fee. The amount varies by college. Check the admissions website for the current fee and payment instructions."],
+      "context": ""
+    },
+    {
+      "tag": "academic_support",
+      "patterns": ["Are there tutoring services available?", "Can I get help with my studies?", "Tell me about academic support"],
+      "responses": ["Yes, the college offers tutoring and academic support services to assist students with their studies. You can often find help through the academic resource center or specific departments."],
+      "context": ""
+    },
+    {
+      "tag": "career_services",
+      "patterns": ["Are there career services available?", "Can I get help with job placement?", "Tell me about career resources"],
+      "responses": ["The college provides career services to help students explore career options, develop job search strategies, and connect with potential employers. Take advantage of resume workshops, career fairs, and networking events."],
+      "context": ""
+    },
+    {
+      "tag": "student_activities",
+      "patterns": ["Are there extracurricular activities?", "Tell me about student clubs and organizations", "What activities can I participate in?"],
+      "responses": ["Yes, the college offers a wide range of extracurricular activities including clubs, organizations, sports teams, and cultural events. You'll have plenty of opportunities to pursue your interests and make friends."],
+      "context": ""
+    },
+    {
+      "tag": "health_services",
+      "patterns": ["Are there health services available on campus?", "Can I access medical care?", "Tell me about health resources"],
+      "responses": ["Yes, the college provides health services to students including medical care, counseling, and wellness programs. You can usually find support through the student health center or counseling services."],
+      "context": ""
+    },
+    {
+      "tag": "scholarship_deadline",
+      "patterns": ["When is the deadline to apply for scholarships?", "Tell me about scholarship deadlines", "How can I apply for scholarships?"],
+      "responses": ["Scholarship deadlines vary by program and scholarship. Be sure to check the college's financial aid website for the latest information and application instructions."],
+      "context": ""
+    },
+    {
+      "tag": "admission_website",
+      "patterns": ["What is the college's official website?", "Where can I find more information about admissions?", "Tell me about the admissions website"],
+      "responses": ["You can find more information about admissions on the college's official website. Simply visit [website link] for details on programs, requirements, deadlines, and more."],
+      "context": ""
+    },
+    {
+      "tag": "application_process",
+      "patterns": ["How do I apply?", "Tell me about the application process", "What steps do I need to take to apply?"],
+      "responses": ["To apply, you'll typically need to complete an online application, submit required documents, and pay any application fees. Check the admissions website for specific instructions and deadlines."],
+      "context": ""
+    },
+    {
+      "tag": "financial_aid_application",
+      "patterns": ["How do I apply for financial aid?", "Tell me about the financial aid application process", "What forms do I need to submit for financial aid?"],
+      "responses": ["To apply for financial aid, you'll typically need to complete the Free Application for Federal Student Aid (FAFSA) or the college's financial aid application, and submit any required documents such as tax returns or income statements. Be sure to meet all deadlines for consideration."],
+      "context": ""
+    },
+    {
+      "tag": "online_resources",
+      "patterns": ["Are there online resources available for applicants?", "Tell me about online application resources", "Where can I find help online?"],
+      "responses": ["Yes, the college provides online resources for applicants including application guides, FAQs, and contact information for admissions staff. Check the admissions website for assistance with your application."],
+      "context": ""
+    }
+  ]
+}
