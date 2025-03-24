@@ -28,10 +28,16 @@
 
 ---
 
-18 - 22 --> 5 days --> Basic AIML
+18 - 22 --> 5 days --> Basic AIML --> NLP & NN
+
 Tuesday - Saturday
 
-24 - 28 --> 5 days --> Moderate AIML
-Monday - Friday
+24 - 27 --> 4 days --> Moderate AIML --> DL & OpenCV
+
+Monday - Thrusday
+
+- day-10 --> 30 because of final project submission.
+- --> review first then present
+- --> only top 10 presenters can present
 
 1st April - Tuesday (Dean / VC)
