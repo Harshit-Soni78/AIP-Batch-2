@@ -1,14 +1,13 @@
 import cv2
-import sys
 
-s = 0
-if len(sys.argv) > 1:
-    s = sys.argv[1]
+# s = 0
+# if len(sys.argv) > 1:
+#     s = sys.argv[1]
 
-source = cv2.VideoCapture(s)
+source = cv2.VideoCapture(0)
 
 win_name = 'Camera Preview'
-cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+cv2.namedWindow(win_name, cv2.WINDOW_FREERATIO)
 
 while cv2.waitKey(1) != 27: # Escape
     has_frame, frame = source.read()
