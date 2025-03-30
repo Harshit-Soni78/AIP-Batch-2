@@ -1,0 +1,10 @@
+pytesseract 
+opencv-python
+numpy 
+Pillow
+nltk  
+flask  
+textblob
+heapq
+matplotlib 
+

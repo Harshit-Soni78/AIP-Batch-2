@@ -1,0 +1,181 @@
+<!-- This HTML file is used to create a simple web interface for uploading files, extracting text, and summarizing it. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Text Extractor & Summarizer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e8f9ff;
+        text-align: center;
+        padding: 20px;
+        margin: auto;
+      }
+
+      .heading {
+        margin: auto;
+        text-align: center;
+        color: #2b52ff;
+      }
+
+      .instruction {
+        margin: auto;
+        text-align: center;
+        color: #444;
+        font-size: medium;
+      }
+
+      .instruction-2 {
+        margin: auto;
+        margin-left: 30%;
+        margin-right: 25%;
+        text-align: left;
+        color: #9d9d9d;
+        font-size: small;
+      }
+
+      form {
+        background: rgb(200, 218, 255);
+        padding: 20px;
+        border: 1px solid #001c83;
+        border-radius: 8px;
+        box-shadow:20px 20px 20px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        margin-top: 20px;
+      }
+
+      input[type="file"] {
+        padding: 10px;
+        border: 1px solid #003474;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: #3845ff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #resultImage {
+        margin-top: 20px;
+        max-width: 100%;
+        border: 1px solid #ddd;
+      }
+
+      .container {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #444;
+        margin-left: 15%;
+        margin-right: 15%;
+        text-align: left;
+      }
+
+      hr{
+        color: #2b52ff;
+        border: 1px solid #2b52ff;
+        margin: 30px auto;
+        width: 70%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="heading">Welcome to WordScan!</h1>
+    <hr />
+    <h1 class="instruction">
+      # Upload a PDF or Image for Text Extraction & Summarization
+    </h1>
+    <div class="instruction-2">
+      <ol>
+        <li>
+          This Document scanner provides you with a cleaned grayscale image of
+          the image you uploaded
+        </li>
+        <li>
+          Always remeber the higher the resolution the higher the accuracy of
+          the text extractor
+        </li>
+        <li>
+            The document should have visible edges!
+        </li>
+        <li>
+          Image processed will be stored under \processed directory
+        </li>
+        <li>
+          file format: .jpg, .png, .jpeg
+          upload one file at a time.
+        </li>
+      </ol>
+    </div>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" id="fileInput" name="file" required />
+      <button class="scan" type="submit">Scan</button>
+    </form>
+    <br />
+    <br />
+    <img id="resultImage" src="" alt="Result Image" />
+    <div class="container">
+      <p id="textResult"></p>
+    </div>
+    <button id="summarize" type="button">Summarize</button>
+    <div class="container">
+        <p id="summaryResult"></p>
+    </div>
+</body>
+
+    <script>
+      // Handle File Upload & Processing
+      $("#uploadForm").submit(function (event) {
+        event.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+          url: "/upload",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            $("#resultImage").attr("src", response.image_url).show();
+            $("#textResult").text(response.extracted_text);
+          },
+          error: function () {
+            alert("Error processing the file.");
+          },
+        });
+      });
+
+      // Handle Text Summarization
+      $("#summarize").click(function () {
+        let extractedText = $("#textResult").text();
+        if (extractedText === "No text result yet.") {
+          alert("Please scan a document first.");
+          return;
+        }
+
+        $.ajax({
+          url: "/summarize",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ text: extractedText }),
+          success: function (response) {
+            $("#summaryResult").text(response.summary);
+          },
+          error: function () {
+            alert("Error summarizing the text.");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
