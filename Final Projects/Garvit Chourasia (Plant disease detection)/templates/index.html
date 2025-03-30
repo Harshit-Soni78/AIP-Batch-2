@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Leaf Disease Classifier</title>
+    <style>
+        body {font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6;}
+        .upload-container {text-align: center; margin: 30px 0;}
+        .upload-box {border: 2px dashed #aaa; border-radius: 5px; padding: 30px; cursor: pointer; transition: all 0.3s; margin-bottom: 20px;}
+        .upload-box:hover {border-color: #4CAF50; background: #f9f9f9;}
+        #image-preview {max-width: 100%; max-height: 300px; margin: 15px auto; display: block; border-radius: 5px;}
+        .btn {background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background 0.3s;}
+        .btn:hover {background: #45a049;}
+        .result-container {margin-top: 30px; padding: 20px; background: #f8f8f8; border-radius: 5px; border-left: 4px solid #4CAF50;}
+        .error {color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: 10px; border-radius: 4px; margin: 20px 0;}
+        .hidden {display: none;}
+        .treatment-section {background: white; padding: 15px; border-radius: 5px; margin: 15px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+        .treatment-section h3 {margin-top: 0; color: #2c3e50;}
+        .treatment-section ul {padding-left: 20px;}
+        .treatment-section li {margin-bottom: 8px;}
+        .confidence-badge {display: inline-block; background: #4CAF50; color: white; padding: 3px 8px; border-radius: 12px; font-size: 14px; margin-left: 8px;}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Apple Leaf Disease Classifier</h1>
+    <div class="upload-container">
+        <form method="post" enctype="multipart/form-data" id="uploadForm">
+            <div class="upload-box" id="uploadBox">
+                <p>Click to upload an image of an apple leaf</p>
+                <p><small>Supported formats: JPG, PNG</small></p>
+                <img id="image-preview" class="hidden" alt="Preview">
+            </div>
+            <input type="file" id="fileInput" name="file" accept="image/*" class="hidden">
+            <button type="submit" class="btn">Analyze Image</button>
+        </form>
+    </div>
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    {% if result %}
+    <div class="result-container">
+        <h2>Analysis Results</h2>
+        <img src="{{ url_for('static', filename='uploads/' + image_to_show) }}" style="max-width: 100%; max-height: 300px; margin-bottom: 20px;">
+        <div class="diagnosis-result">
+            <h3>Diagnosis: {{ result.class }} <span class="confidence-badge">{{ result.confidence }}</span></h3>
+            {% if result.description %}<p>{{ result.description }}</p>{% endif %}
+        </div>
+        {% if result.remedies %}
+        <div class="treatment-section">
+            <h3>Recommended Treatments</h3>
+            <ul>{% for remedy in result.remedies %}<li>{{ remedy }}</li>{% endfor %}</ul>
+        </div>
+        {% endif %}
+        {% if result.prevention %}
+        <div class="treatment-section">
+            <h3>Prevention Tips</h3>
+            <p>{{ result.prevention }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('image-preview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        document.getElementById('uploadBox').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+    </script>
+</body>
+</html>
