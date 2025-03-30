@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #e8f5e9;  
+            background-image: url('/static/background.jpg');  
+            background-size: 100% 100%; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+            color: #333; 
+        }
+
+        .container {
+            margin-top: 30px; 
+            background: rgba(255, 255, 255, 0.6); 
+            padding: 40px; 
+            border-radius: 15px; 
+            display: inline-block;
+            width: 80%; 
+            max-width: 800px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+
+        .upload-btn {
+            margin: 20px 0;
+        }
+
+        .classify-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .classify-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waste Classification Model</h1>
+    <div class="container" style="font-size: 20px;">
+        <label for="imageUpload" style="font-size: 22px; font-weight: bold;">Click on the image icon to upload an image:</label><br>
+        <input type="file" id="imageUpload" accept="image/*" class="upload-btn" style="font-size: 18px; padding: 10px;"><br>
+        <button class="classify-btn" onclick="classifyWaste()" style="font-size: 20px; padding: 12px 24px;">Classify your waste material</button>
+        <p id="result" style="font-size: 22px; font-weight: bold; margin-top: 20px;"></p>
+    </div>
+
+    <script>
+        async function classifyWaste() {
+            const imageInput = document.getElementById('imageUpload');
+            if (imageInput.files.length === 0) {
+                alert('Please upload an image first!');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', imageInput.files[0]);
+
+            document.getElementById('result').innerText = 'Classifying... Please wait.';
+
+            try {
+                const response = await fetch('/classify', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to classify the image.');
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('result').innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('result').innerText = data.result;
+                }
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
