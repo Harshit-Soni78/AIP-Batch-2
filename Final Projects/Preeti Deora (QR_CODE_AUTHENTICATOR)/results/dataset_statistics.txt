@@ -1,0 +1,4 @@
+Total First Prints: 100
+Total Second Prints: 100
+Average Mean Intensity (First Prints): 121.61
+Average Mean Intensity (Second Prints): 105.16
