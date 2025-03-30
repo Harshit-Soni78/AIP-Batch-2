@@ -1,0 +1,123 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distress Alert Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Social Media Post Distress Alert</h1>
+        <div class="form-container">
+            <form method="POST">
+                <label for="username">Enter X Username:</label>
+                <input type="text" id="username" name="username" required placeholder="username (without @)" pattern="[a-zA-Z0-9_]+">
+                <small>Please enter the username without the '@' symbol</small><br>
+
+                <label for="max_tweets">Number of posts to analyze:</label>
+                <select id="max_tweets" name="max_tweets">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+                <button type="submit">Analyze</button>
+            </form>
+        </div>
+
+        {% if report %}
+        <h2>Analysis Report for @{{ username }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tweet</th>
+                    <th>Sentiment (Score)</th>
+                    <th>Flagged Keywords</th>
+                    <th>Alert</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in report %}
+                <tr>
+                    <td>
+                        <a href="https://x.com/{{ username }}/status/{{ result.id }}" target="_blank">{{ result.text }}</a>
+                        <br><small>{{ result.created_at.strftime('%b %d, %Y %I:%M %p') if result.created_at else 'N/A' }}</small>
+                    </td>
+                    <td>{{ result.sentiment }} ({{ result.compound_score|round(4) }})</td>
+                    <td>{{ result.flagged_keywords|join(', ') or 'None' }}</td>
+                    <td {% if result.alert == "Potential distress detected" %}class="distress"{% endif %}>
+                        {{ result.alert }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Summary Statistics</h3>
+        <p>Average sentiment score: {{ average_score|round(4) }}</p>
+        <p>Percentage of posts with potential distress: {{ distress_percentage|round(2) }}%</p>
+
+        <h3>Sentiment Score Visualization</h3>
+        <canvas id="sentimentChart" width="800" height="400"></canvas>
+
+        {% if distress_count >= threshold %}
+        <div class="distress-alert">
+            <p>🚨 {{ distress_count }} distress alerts detected (Threshold: {{ threshold }})</p>
+            <h3>Suggestions for Support:</h3>
+            <ul>
+                {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+    {% if scores %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var scores = {{ scores | tojson }};
+        var labels = {{ labels | tojson }};
+        var colors = {'Positive': 'green', 'Negative': 'red', 'Neutral': 'grey'};
+        var tweet_labels = [];
+        for (var i = 0; i < scores.length; i++) { tweet_labels.push('Tweet ' + (i+1)); }
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tweet_labels,
+                datasets: [{
+                    label: 'Sentiment Scores',
+                    data: scores,
+                    borderWidth: 1,
+                    backgroundColor: labels.map(function(label) { return colors[label]; })
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: -1,
+                        max: 1,
+                        stepSize: 0.2
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.datasets[0].label;
+                            var value = data.datasets[0].data[tooltipItem.index];
+                            var sentimentLabel = labels[tooltipItem.index];
+                            return label + ': ' + value + ' (' + sentimentLabel + ')';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

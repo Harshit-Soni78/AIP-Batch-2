@@ -1,0 +1,7 @@
+nltk==3.9.1
+spacy==3.8.4
+Flask
+tweepy
+python-dotenv
+requests
+beautifulsoup4
